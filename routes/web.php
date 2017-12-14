@@ -11,10 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['middleware' => ['web']], function (){
+    Route::get('/', 'PagesController@getIndex');
+
+    Route::get('/about', 'PagesController@getAbout');
+
+    Route::get('/contact', 'PagesController@getContact');
+
+    Route::resource('posts', 'PostController');
 });
 
-Route::get('/task', function(){
-    return view('task');
-});
+
